@@ -6,17 +6,29 @@ let tasaInteres = calculoInteres(cuotas);
 let precioCuota = calculoCuotas(monto, tasaInteres, cuotas);
 let devolucionTotal = devolucion(precioCuota, cuotas);
 
+// Creo un array para almacenar el detalle de cada cuota:
+let arrayCuotas = [];
+
 if (cuotas <= 12) {
-  let mensaje = '';
-  // Use un bucle for para generar el mensaje de cada cuota y se le vaya sumando una linea de texto dependiendo el numero de cuotas que solicito.
+  // Use un for para guardar en el array las cuotas
   for (let i = 1; i <= cuotas; i++) {
-    mensaje += `Cuota número: ${i} - Monto de cuota: $${precioCuota.toFixed(2)}\n`;
+    // Guardo cada cuota como un objeto en el array:
+    arrayCuotas.push({
+      numeroCuota: i,
+      monto: precioCuota.toFixed(2)
+    });
   }
-  
-  // Agrego el total a devolver al final del mensaje:
+
+  // Armo el mensaje a partir del array de cuotas:
+  let mensaje = '';
+  arrayCuotas.forEach(cuota => {
+    mensaje += `Cuota número: ${cuota.numeroCuota} - Monto de cuota: $${cuota.monto}\n`;
+  });
+
+  // Añado el total a devolver al final del mensaje
   mensaje += `\nTotal a devolver: $${devolucionTotal.toFixed(2)}`;
   
-  // Muestro el mensaje atravez de un alert:
+  // Muestro el mensaje en un alert
   alert(mensaje);
   
 } else {
